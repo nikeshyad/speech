@@ -68,7 +68,7 @@ export default class MathApp extends React.Component {
 
       case 'Spanish':
         onCorrect = 'Correcto!';
-        onWrong = 'Incorrecto';
+        onWrong = 'Incorrecto!';
         break;
 
       case 'French':
