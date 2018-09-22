@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker, ScrollView, KeyboardAvoidingView, Alert, StyleSheet, View, Vibration, TextInput } from 'react-native';
+import { Picker, ScrollView, KeyboardAvoidingView, StyleSheet, View, Vibration, TextInput } from 'react-native';
 import { Container, Header, Content, Button, Text, Item, Input, Icon, Badge, InputGroup } from 'native-base';
 import { CheckBox, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import ToggleSwitch from 'toggle-switch-react-native';
