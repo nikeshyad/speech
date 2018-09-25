@@ -7,8 +7,11 @@ import { Dropdown } from 'react-native-material-dropdown';
 
 
 export default class MathApp extends React.Component {
+
   constructor(props) {
+
     super(props);
+
     this.state = {
       alpha: '',
       beta: '',
@@ -17,6 +20,7 @@ export default class MathApp extends React.Component {
       checked: '',
       lang: '',
       ops: ['+', '-', '*'],
+      formInputText: '',
     };
   }
 
@@ -55,49 +59,124 @@ export default class MathApp extends React.Component {
   }
 
 
-  handleTextChange = (text) => {
+  checkMyAnsButtonPress = () => {
 
-    var onCorrect;
-    var onWrong;
+  	var onCorrectArray = ['Yay!', 'Good Job!', 'Niceeeeee!', 'Woohooo!', 'Congratulations!'];
+    var onWrongArray = ['Not Quite!', 'Try Again!', 'Good Try!', 'Good Effort!', 'Almost Got It!']
 
-    switch(this.state.lang) {
-      case 'English':
-        onCorrect = 'Yay!';
-        onWrong = 'Not Quite!';
-        break;
+    var onCorrect = onCorrectArray[Math.floor(Math.random() * onCorrectArray.length)];
+    var onWrong = onWrongArray[Math.floor(Math.random() * onWrongArray.length)];
 
-      case 'Spanish':
-        onCorrect = 'Correcto!';
-        onWrong = 'Incorrecto!';
-        break;
+    var soundFile;
 
-      case 'French':
-        onCorrect = 'Correct!';
-        onWrong = 'Incorrect!';
-        break;
+    if (this.state.rand == 0 && this.state.alpha + this.state.beta == this.state.formInputText) {
+    	this.setState({result: onCorrect}); 
+    	soundFile = onCorrect;
 
-      case 'Chinese':
-        onCorrect = '正确';
-        onWrong = '不正确';
-        break;
+    } else if (this.state.rand == 1 && this.state.alpha - this.state.beta == this.state.formInputText) {
+    	this.setState({result: onCorrect}); 
+    	soundFile = onCorrect;
 
-      case 'Japanese':
-        onCorrect = '正しい';
-        onWrong = '間違った';
-        break;
+    } else if (this.state.rand == 2 && this.state.alpha * this.state.beta == this.state.formInputText) {
+    	this.setState({result: onCorrect}); 
+    	soundFile = onCorrect;
+
+    } else {
+      	this.setState({result: onWrong});
+      	soundFile = onWrong
     }
-    
-    if (this.state.rand == 0 && this.state.alpha + this.state.beta == text) {this.setState({result: onCorrect})}
-    else if (this.state.rand == 1 && this.state.alpha - this.state.beta == text) {this.setState({result: onCorrect})}
-    else if (this.state.rand == 2 && this.state.alpha * this.state.beta == text) {this.setState({result: onCorrect})}
-    else {
-      this.setState({result: onWrong})
+
+    //console.log(soundFile)
+
+    // require() can't handle dynamic file parameter so had to handle case by case for each sound file
+    // for example cannot say require(soundFile)
+    // has to be a string literal as an argument for ex. require('./soundFile')
+
+    if (this.state.checked) {
+
+	    switch(soundFile) {
+	    	case 'Yay!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Yay!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Good Job!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Good Job!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Niceeeeee!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Niceeeeee!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Woohooo!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Woohooo!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Congratulations!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Congratulations!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Not Quite!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Not Quite!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Try Again!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Try Again!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Good Try!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Good Try!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Good Effort!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Good Effort!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	case 'Almost Got It!':
+	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
+	        		require('./Sound/Almost Got It!.m4a'),
+	        		{ shouldPlay: true }
+	      		);
+	      		break;
+
+	      	}
+
+
+	      }
+
+
     }
-    console.log(this.state.result)
-  }
 
 
-  handleButtonPress = () => {
+  handleNextButtonPress = () => {
+
+  	this.setState({result: ''})
 
     var randomAlpha = Math.floor(Math.random() * 13);
     var randomBeta = Math.floor(Math.random() * 13);
@@ -182,8 +261,13 @@ export default class MathApp extends React.Component {
         
         <FormLabel>Result</FormLabel>
         <FormInput 
-          inputStyle={{width: 235, fontSize: 40, color: 'black', backgroundColor: '#eeeeee'}}
-          onChangeText= {(text) => this.handleTextChange(text)}/>
+          ref={input => this.formInput = input}
+          inputStyle={{width: 275, fontSize: 40, color: 'black', backgroundColor: '#eeeeee'}}
+          onChangeText= {(text) => this.setState({formInputText: text})}/>
+
+        <Button onPress = {() => this.checkMyAnsButtonPress()} block success>
+            <Text> Check my answer! </Text>
+        </Button>
 
         <Text style={{padding: 10, fontSize: 40}}>
           {this.state.result}
@@ -208,7 +292,7 @@ export default class MathApp extends React.Component {
         />
 
 
-        <Button onPress = {() => this.handleButtonPress()} block>
+        <Button onPress = {() => this.handleNextButtonPress()} block success>
             <Text> Next </Text>
         </Button>
 
@@ -227,7 +311,7 @@ const styles = StyleSheet.create({
   },
 
   box: {
-    width: 240,
+    width: 300,
     height: 70,
     borderRadius: 100/2,
     backgroundColor: '#eeeeee',
