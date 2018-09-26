@@ -62,8 +62,8 @@ export default class PlayGround extends React.Component {
 
   checkMyAnsButtonPress = () => {
 
-  	var onCorrectArray = ['Yay!', 'Good Job!', 'Niceeeeee!', 'Woohooo!', 'Congratulations!'];
-    var onWrongArray = ['Not Quite!', 'Try Again!', 'Good Try!', 'Good Effort!', 'Almost Got It!']
+  	var onCorrectArray = ['Yay!', 'Niceeeeee!', 'Woohooo!', 'Congratulations!'];
+    var onWrongArray = ['Not_Quite!', 'Try_Again!', 'Good_Effort!', 'Almost!']
 
     var onCorrect = onCorrectArray[Math.floor(Math.random() * onCorrectArray.length)];
     var onWrong = onWrongArray[Math.floor(Math.random() * onWrongArray.length)];
@@ -103,13 +103,6 @@ export default class PlayGround extends React.Component {
 	      		);
 	      		break;
 
-	      	case 'Good Job!':
-	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
-	        		require('./Sound/Good Job!.m4a'),
-	        		{ shouldPlay: true }
-	      		);
-	      		break;
-
 	      	case 'Niceeeeee!':
 	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
 	        		require('./Sound/Niceeeeee!.m4a'),
@@ -131,37 +124,30 @@ export default class PlayGround extends React.Component {
 	      		);
 	      		break;
 
-	      	case 'Not Quite!':
+	      	case 'Not_Quite!':
 	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
-	        		require('./Sound/Not Quite!.m4a'),
+	        		require('./Sound/Not_Quite!.m4a'),
 	        		{ shouldPlay: true }
 	      		);
 	      		break;
 
-	      	case 'Try Again!':
+	      	case 'Try_Again!':
 	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
-	        		require('./Sound/Try Again!.m4a'),
+	        		require('./Sound/Try_Again!.m4a'),
 	        		{ shouldPlay: true }
 	      		);
 	      		break;
 
-	      	case 'Good Try!':
+	      	case 'Good_Effort!':
 	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
-	        		require('./Sound/Good Try!.m4a'),
+	        		require('./Sound/Good_Effort!.m4a'),
 	        		{ shouldPlay: true }
 	      		);
 	      		break;
 
-	      	case 'Good Effort!':
+	      	case 'Almost!':
 	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
-	        		require('./Sound/Good Effort!.m4a'),
-	        		{ shouldPlay: true }
-	      		);
-	      		break;
-
-	      	case 'Almost Got It!':
-	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
-	        		require('./Sound/Almost Got It!.m4a'),
+	        		require('./Sound/Almost!.m4a'),
 	        		{ shouldPlay: true }
 	      		);
 	      		break;
