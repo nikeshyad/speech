@@ -1,8 +1,7 @@
 import React from 'react';
-import { Picker, ScrollView, KeyboardAvoidingView, StyleSheet, View, Vibration, TextInput } from 'react-native';
-import { Container, Header, Content, Button, Text, Item, Input, Icon, Badge, InputGroup } from 'native-base';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, Item, Input } from 'native-base';
 import { CheckBox, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-import ToggleSwitch from 'toggle-switch-react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 
 export default class PlayGround extends React.Component {
