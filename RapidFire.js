@@ -275,6 +275,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
     fontSize: 40,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 
   timerBox: {

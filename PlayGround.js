@@ -310,6 +310,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
     textAlign: 'center',
     fontSize: 40,
+    fontWeight: 'bold',
   },
 
 });
