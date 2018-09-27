@@ -61,10 +61,15 @@ export default class PlayGround extends React.Component {
   checkMyAnsButtonPress = () => {
 
   	var onCorrectArray = ['Yay!', 'Niceeeeee!', 'Woohooo!', 'Congratulations!'];
-    var onWrongArray = ['You_Suck!', 'Not_Quite!', 'Try_Again!', 'Good_Effort!', 'Almost!']
+    var onWrongArray = ['You_Suck!', 'Not_Quite!', 'Try_Again!', 'Good_Effort!', 'Almost_Got_It!']
 
     var onCorrect = onCorrectArray[Math.floor(Math.random() * onCorrectArray.length)];
     var onWrong = onWrongArray[Math.floor(Math.random() * onWrongArray.length)];
+
+    //getting rid of underscores
+    var splt = onWrong.split("_");
+    onWrongNew = splt.join(' ');
+    //
 
     var soundFile;
 
@@ -81,7 +86,7 @@ export default class PlayGround extends React.Component {
     	soundFile = onCorrect;
 
     } else {
-      	this.setState({result: onWrong});
+      	this.setState({result: onWrongNew});
       	soundFile = onWrong
     }
 
@@ -143,9 +148,9 @@ export default class PlayGround extends React.Component {
 	      		);
 	      		break;
 
-	      	case 'Almost!':
+	      	case 'Almost_Got_It!':
 	    		var { sound: soundObject, status } = Expo.Audio.Sound.create(
-	        		require('./Sound/Almost!.m4a'),
+	        		require('./Sound/Almost_Got_It!.m4a'),
 	        		{ shouldPlay: true }
 	      		);
 	      		break;
