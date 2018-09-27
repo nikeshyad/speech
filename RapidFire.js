@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { Button, Text, Item, Input } from 'native-base';
 import { CheckBox, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -14,7 +14,7 @@ export default class RapidFire extends React.Component {
       result: '',
       rand: '',
       checked: '',
-      ops: ['+', '-', '*'],
+      ops: ['+', '-', 'x'],
       formInputText: '',
       timer: '',
     };
@@ -52,7 +52,7 @@ export default class RapidFire extends React.Component {
       operation = 'plus'
     } else if (this.state.ops[this.state.rand] == '-') {
       operation = 'minus'
-    } else if (this.state.ops[this.state.rand] == '*') {
+    } else if (this.state.ops[this.state.rand] == 'x') {
       operation = 'times'
     }
 
@@ -74,7 +74,7 @@ export default class RapidFire extends React.Component {
         operation = 'plus'
       } else if (this.state.ops[this.state.rand] == '-') {
         operation = 'minus'
-      } else if (this.state.ops[this.state.rand] == '*') {
+      } else if (this.state.ops[this.state.rand] == 'x') {
         operation = 'times'
       }
 
@@ -100,7 +100,7 @@ export default class RapidFire extends React.Component {
   checkMyAnsButtonPress = () => {
 
   	var onCorrectArray = ['Yay!', 'Niceeeeee!', 'Woohooo!', 'Congratulations!'];
-    var onWrongArray = ['Not_Quite!', 'Try_Again!', 'Good_Effort!', 'Almost!']
+    var onWrongArray = ['You_Suck!','Not_Quite!', 'Try_Again!', 'Good_Effort!', 'Almost!']
 
     var onCorrect = onCorrectArray[Math.floor(Math.random() * onCorrectArray.length)];
     var onWrong = onWrongArray[Math.floor(Math.random() * onWrongArray.length)];
@@ -189,6 +189,13 @@ export default class RapidFire extends React.Component {
 	      		);
 	      		break;
 
+          case 'You_Suck!':
+          var { sound: soundObject, status } = Expo.Audio.Sound.create(
+              require('./Sound/You_Suck!.m4a'),
+              { shouldPlay: true }
+            );
+            break;
+
 	      	}
 
 
@@ -207,33 +214,33 @@ export default class RapidFire extends React.Component {
           {this.state.timer}
         </Text>
 
-        <Text style = {styles.box}>
+        <Text style = {styles.intBox}>
           {this.state.alpha}
         </Text>
 
-        <Text style = {{padding: 10, fontSize: 40}}>
+        <Text style = {{textAlign: 'center', fontSize: 40, paddingRight: 15}}>
           {this.state.ops[this.state.rand]}
         </Text>
 
-        <Text style = {styles.box}>
+        <Text style = {styles.intBox}>
           {this.state.beta}
         </Text>
 
-        <Text style = {{padding: 10, fontSize: 40}}>
+        <Text style = {{textAlign: 'center', fontSize: 40, paddingRight: 10}}>
           =
         </Text>
         
         <FormLabel>Result</FormLabel>
         <FormInput 
           ref={input => this.formInput = input}
-          inputStyle={{width: 300, fontSize: 40, color: 'black', backgroundColor: '#eeeeee'}}
+          inputStyle={{textAlign: 'center', paddingRight: 15, width: Dimensions.get('window').width/1.32, fontSize: 30, color: 'black', backgroundColor: '#eeeeee'}}
           onChangeText= {(text) => this.setState({formInputText: text})}/>
 
-        <Button onPress = {() => this.checkMyAnsButtonPress()} block success rounded>
+        <Button style = {styles.buttonContainer} onPress = {() => this.checkMyAnsButtonPress()} block success rounded>
             <Text> Check My Answer! </Text>
         </Button>
 
-        <Text style={{padding: 10, fontSize: 40}}>
+        <Text style={{textAlign: 'center', padding: 15, fontSize: 30}}>
           {this.state.result}
         </Text>
 
@@ -258,21 +265,27 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  box: {
-    width: 325,
-    height: 70,
-    borderRadius: 100/2,
+  buttonContainer: {
+    marginTop: 10,
+  },
+
+  intBox: {
+    width: Dimensions.get('window').width/1.2,
+    height: Dimensions.get('window').height/15,
     backgroundColor: '#eeeeee',
-    padding: 10,
-    fontSize: 50,
+    fontSize: 40,
+    textAlign: 'center',
   },
 
   timerBox: {
+    width: Dimensions.get('window').width/1.2,
+    height: Dimensions.get('window').height/15,
     backgroundColor: '#fd5f5f',
-    padding: 5,
+    padding: 10,
+    paddingRight: 5,
     fontSize: 30,
     textAlign: 'center',
-
+    marginBottom: 15,
   },
 
 });
